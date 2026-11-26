@@ -1,13 +1,24 @@
 Frost (luci-theme-frost)
 =======================
 
+Attribution
+-----------
+Creative direction and requirements : human author (project maintainer, @lucikap)
+Implementation                      : DeepSeek v4.1 Flash model
+
+Upstream
+--------
 This theme is a derivative work of luci-theme-argon:
   https://github.com/jerrykuku/luci-theme-argon
   Copyright (C) 2008-2024 Jerrykuku and contributors
   Licensed under the Apache License, Version 2.0
 
-Modifications and additions for Frost:
-  Copyright (C) 2026 Frost contributors
-  Licensed under the Apache License, Version 2.0 (and MIT where applicable)
+License
+-------
+Frost is distributed under the Apache License, Version 2.0, the same license
+as the upstream luci-theme-argon repository. See LICENSE.
 
-The original Argon stylesheet is the base of styles/cascade.source.css.
+Third-party notices
+-------------------
+- normalize.css (embedded in styles/cascade.source.css) is MIT licensed.
+- The Argon stylesheet is the base of styles/cascade.source.css.

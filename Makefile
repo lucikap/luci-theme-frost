@@ -12,10 +12,10 @@ LUCI_BASENAME:=frost-config
 
 PKG_VERSION:=3.1.4
 PKG_PO_VERSION:=3.1.4
-PKG_RELEASE:=20261179
+PKG_RELEASE:=20261180
 PKG_PROVIDES:=luci-app-frost-config
 
-PKG_LICENSE:=Apache-2.0 MIT
+PKG_LICENSE:=Apache-2.0
 
 LUCI_MINIFY_CSS:=0
 # Ship template source across stable and snapshot runtimes. Precompiled

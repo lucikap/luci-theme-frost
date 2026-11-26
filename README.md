@@ -5,7 +5,7 @@
 **A glassmorphism LuCI theme for OpenWrt / ImmortalWrt**
 **一个玻璃拟态风格的 LuCI 主题**
 
-[![License](https://img.shields.io/badge/license-Apache--2.0%20%7C%20MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![LuCI](https://img.shields.io/badge/LuCI-24.10%2B%20%7C%20SNAPSHOT-informational.svg)]()
 
 <img src="docs/screenshots/login.png" width="820" alt="Frost login page">
@@ -51,7 +51,7 @@ Prebuilt packages are attached to [Releases](https://github.com/lucikap/luci-the
 
 ```sh
 # ImmortalWrt / OpenWrt (apk)
-apk add --allow-untrusted luci-theme-frost-3.1.4-r20261179.apk
+apk add --allow-untrusted luci-theme-frost-3.1.4-r20261180.apk
 uci set luci.main.mediaurlbase='/luci-static/frost'
 uci set luci.themes.Frost='/luci-static/frost'
 uci commit luci
@@ -118,11 +118,15 @@ styles/cascade.source.css      # 可读 CSS 源码
 scripts/minify-css.js          # csso 压缩脚本
 ```
 
-### 致谢与许可
+### 声明与许可
 
-- 基于 **luci-theme-argon**（© Jerrykuku，Apache-2.0）
-- 本项目：**Apache-2.0 / MIT**，见 [LICENSE](LICENSE) 与 [NOTICE](NOTICE)
-- 欢迎提交 issue / PR
+- **创意与需求**：人类作者（项目发起人，GitHub [@lucikap](https://github.com/lucikap)）
+- **实现**：DeepSeek v4.1 Flash 模型
+- **上游主题**：[luci-theme-argon](https://github.com/jerrykuku/luci-theme-argon)（© Jerrykuku and contributors）
+- **许可证**：**Apache-2.0**，与原主题仓库保持一致，见 [LICENSE](LICENSE) 与 [NOTICE](NOTICE)
+
+> 本主题的创意由人类作者提供，具体实现由 DeepSeek v4.1 Flash 模型完成；
+> 上游 luci-theme-argon 采用 Apache-2.0，本项目沿用同一许可证。
 
 ---
 
@@ -200,8 +204,13 @@ Settings live under **System → Frost Config** (`/etc/config/frost`).
 
 - Keep `LUCI_MINIFY_UT:=0` so template sources work on both stable and snapshot ucode runtimes.
 
-### Credits & License
+### Attribution & License
 
-- Forked from **luci-theme-argon** (© Jerrykuku, Apache-2.0)
-- **Apache-2.0 / MIT** — see [LICENSE](LICENSE) and [NOTICE](NOTICE)
-- Issues and pull requests are welcome
+- **Creative direction**: human author (project maintainer, GitHub [@lucikap](https://github.com/lucikap))
+- **Implementation**: DeepSeek v4.1 Flash model
+- **Upstream**: [luci-theme-argon](https://github.com/jerrykuku/luci-theme-argon) (© Jerrykuku and contributors)
+- **License**: **Apache-2.0**, the same license as the upstream repository — see [LICENSE](LICENSE) and [NOTICE](NOTICE)
+
+> The creative direction of this theme was provided by a human author; the
+> implementation was produced with the DeepSeek v4.1 Flash model. The upstream
+> luci-theme-argon is licensed under Apache-2.0 and Frost keeps that license.
