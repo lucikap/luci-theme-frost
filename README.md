@@ -43,6 +43,20 @@
 - **完整中文/多语言**：随包提供 `po/` 翻译，配置项全部中文化
 - **前端性能**：CSS 用 csso 预压缩（324 KB → 270 KB），字体 preload，主题资源带内容指纹 `?v=`
 
+
+### 下载 / Download
+
+预编译安装包见 [Releases](https://github.com/lucikap/luci-theme-frost/releases)。
+Prebuilt packages are attached to [Releases](https://github.com/lucikap/luci-theme-frost/releases).
+
+```sh
+# ImmortalWrt / OpenWrt (apk)
+apk add --allow-untrusted luci-theme-frost-3.1.4-r20261179.apk
+uci set luci.main.mediaurlbase='/luci-static/frost'
+uci set luci.themes.Frost='/luci-static/frost'
+uci commit luci
+```
+
 ### 兼容性
 
 - LuCI **24.10+ / SNAPSHOT**（ucode 模板运行时）
