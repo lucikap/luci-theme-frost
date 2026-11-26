@@ -52,6 +52,7 @@ Prebuilt packages are attached to [Releases](https://github.com/lucikap/luci-the
 ```sh
 # ImmortalWrt / OpenWrt (apk)
 apk add --allow-untrusted luci-theme-frost-3.1.4-r20261180.apk
+apk add --allow-untrusted luci-i18n-frost-config-zh-cn-3.1.4.apk   # 中文语言包 / zh-cn language pack
 uci set luci.main.mediaurlbase='/luci-static/frost'
 uci set luci.themes.Frost='/luci-static/frost'
 uci commit luci
