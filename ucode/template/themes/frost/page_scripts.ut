@@ -1,0 +1,31 @@
+{# Shared location bootstrap; LuCI modules are loaded only after the app shell. -#}
+<script>
+	// thanks for Jo-Philipp Wich <jow@openwrt.org>
+	var luciLocation = {{ ctx.path }};
+</script>
+{% if (!is_login): %}
+<script type="text/javascript">L.require('menu-frost')</script>
+<script type="text/javascript">
+	// bust the browser cache for theme classes whenever the theme assets change
+	if (window.L && L.env && window.__FROST_ASSET_VERSION)
+		L.env.resource_version = window.__FROST_ASSET_VERSION;
+
+	// the compat shim only matters on browsers without :has()
+	if (!(window.CSS && CSS.supports && CSS.supports('selector(:has(*))')))
+		L.require('frost-compat');
+	L.require('frost-ui');
+	L.require('frost-appearance');
+	if ([ 'admin-status', 'admin-status-overview' ].includes(document.body.dataset.page))
+		L.require('frost-overview');
+	if (document.body.dataset.page === 'admin-system-admin-sshkeys')
+		L.require('frost-sshkeys');
+
+	if ([
+		'admin-status-realtime',
+		'admin-status-realtime-load',
+		'admin-status-realtime-bandwidth',
+		'admin-status-realtime-connections'
+	].includes(document.body.dataset.page))
+		L.require('frost-graphs');
+</script>
+{% endif %}

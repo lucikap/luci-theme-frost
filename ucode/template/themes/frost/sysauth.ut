@@ -1,0 +1,55 @@
+{#
+	Frost is a clean HTML5 theme for LuCI. It is based on luci-theme-bootstrap and MUI and Frost Template
+
+	luci-theme-frost
+	Copyright 2020 Jerryk <jerrykuku@gmail.com>
+
+	Have a bug? Please create an issue here on GitHub!
+	https://github.com/jerrykuku/luci-theme-frost/issues
+
+	luci-theme-bootstrap:
+	Copyright 2008 Steven Barth <steven@midlink.org>
+	Copyright 2008-2016 Jo-Philipp Wich <jow@openwrt.org>
+	Copyright 2012 David Menting <david@nut-bolt.nl>
+
+	MUI:
+	https://github.com/muicss/mui
+
+	Frost Theme
+	https://demos.creative-tim.com/frost-dashboard/index.html
+
+	Licensed to the public under the Apache License 2.0
+-#}
+
+{% include("themes/" + theme + "/out_header_login") %}
+{%
+	import * as fs from 'fs';
+	import { cursor } from 'uci';
+	import { get_branding } from 'luci.frost-branding';
+
+	let cfg = cursor();
+	// The theme only ships the centered glass card login layout.
+	const login_style = 'centered';
+
+	const boardinfo = ubus.call("system", "board");
+	const hostname = striptags(boardinfo?.hostname ?? '?');
+	const branding = get_branding();
+	const logo_url = branding.logo ? media + '/branding/' + branding.logo : media + '/img/frost.svg';
+
+%}
+<!-- Login Page Start -->
+<div class="login-page" data-login-style="{{ login_style }}">
+	<noscript><style>.login-page .login-container{opacity:1!important;transform:none!important}.login-page .frost-boot{display:none!important}</style></noscript>
+	<div class="frost-boot" aria-hidden="true"></div>
+	{% include('themes/' + theme + '/login_background', { cfg: cfg, is_login: true }) %}
+	<!-- Login Container Start -->
+	<main class="login-container">
+		<div class="login-form">
+			<!-- Logo Start -->
+			<a class="brand" href="/"><img src="{{ logo_url }}" class="icon" alt="" data-fallback="{{ media }}/img/frost.svg" onerror="this.onerror=null;this.src=this.dataset.fallback">
+				<span class="brand-text">{{ hostname }}</span>
+			</a>
+			<!-- Logo End -->
+			<!-- Login Form Start -->
+			{% include('themes/' + theme + '/login_form') %}
+{% include("themes/" + theme + "/footer_login") %}

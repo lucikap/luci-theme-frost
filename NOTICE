@@ -1,0 +1,13 @@
+Frost (luci-theme-frost)
+=======================
+
+This theme is a derivative work of luci-theme-argon:
+  https://github.com/jerrykuku/luci-theme-argon
+  Copyright (C) 2008-2024 Jerrykuku and contributors
+  Licensed under the Apache License, Version 2.0
+
+Modifications and additions for Frost:
+  Copyright (C) 2026 Frost contributors
+  Licensed under the Apache License, Version 2.0 (and MIT where applicable)
+
+The original Argon stylesheet is the base of styles/cascade.source.css.

@@ -1,0 +1,28 @@
+{
+	"luci-app-frost-config": {
+		"description": "Grant UCI access for luci-app-frost-config",
+		"read": {
+			"file": {
+				"/www/luci-static/frost/background/*": [ "list" ]
+			},
+			"ubus": {
+				"luci.frost": [ "avail" ],
+				"luci.frost_appearance": [ "get" ],
+				"luci.frost_branding": [ "get" ]
+			},
+			"uci": [ "frost" ]
+		},
+		"write": {
+			"file": {
+				"/tmp/frost_background.tmp": [ "write" ],
+				"/tmp/frost_branding_*.png": [ "write" ]
+			},
+			"ubus": {
+				"luci.frost": [ "remove", "rename" ],
+				"luci.frost_appearance": [ "set" ],
+				"luci.frost_branding": [ "set", "reset" ]
+			},
+			"uci": [ "frost" ]
+		}
+	}
+}

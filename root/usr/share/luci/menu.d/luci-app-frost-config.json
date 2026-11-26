@@ -1,0 +1,14 @@
+{
+	"admin/system/frost-config": {
+		"title": "Frost Config",
+		"order": 90,
+		"action": {
+			"type": "view",
+			"path": "frost-config"
+		},
+		"depends": {
+			"acl": [ "luci-app-frost-config" ],
+			"uci": { "frost": true }
+		}
+	}
+}

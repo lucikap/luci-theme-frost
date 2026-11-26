@@ -1,0 +1,8 @@
+*.apk
+*.ipk
+*.lmo
+*.o
+*.pyc
+__pycache__/
+.DS_Store
+node_modules/

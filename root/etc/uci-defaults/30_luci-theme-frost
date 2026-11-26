@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# The empty legacy package saves its conffile before releasing file ownership.
+if [ -f /etc/frost-config-migration/frost ]; then
+	cp -p /etc/frost-config-migration/frost /etc/config/frost || exit 1
+	rm -f /etc/frost-config-migration/frost
+	rmdir /etc/frost-config-migration 2>/dev/null || true
+fi
+
+# Preserve configured values and migrate the old Bing switch only when needed.
+[ -e /etc/config/frost ] || touch /etc/config/frost || exit 1
+if ! uci -q get 'frost.@global[0]' >/dev/null; then
+	uci -q add frost global >/dev/null
+fi
+old_bing="$(uci -q get 'frost.@global[0].bing_background')"
+if [ -n "$old_bing" ]; then
+	if ! uci -q get 'frost.@global[0].online_wallpaper' >/dev/null; then
+		if [ "$old_bing" = 1 ]; then
+			uci set 'frost.@global[0].online_wallpaper=bing'
+		else
+			uci set 'frost.@global[0].online_wallpaper=none'
+		fi
+	fi
+	uci -q delete 'frost.@global[0].bing_background'
+fi
+# Missing selectors identify old installations; preserve their separate choices.
+if ! uci -q get 'frost.@global[0].dark_primary_mode' >/dev/null; then
+	if [ -n "$(uci -q get 'frost.@global[0].dark_primary')" ]; then
+		uci set 'frost.@global[0].dark_primary_mode=custom'
+	else
+		uci set 'frost.@global[0].dark_primary_mode=auto'
+	fi
+fi
+if ! uci -q get 'frost.@global[0].dark_glass_mode' >/dev/null; then
+	light_blur="$(uci -q get 'frost.@global[0].blur')"
+	light_opacity="$(uci -q get 'frost.@global[0].transparency')"
+	dark_blur="$(uci -q get 'frost.@global[0].blur_dark')"
+	dark_opacity="$(uci -q get 'frost.@global[0].transparency_dark')"
+	if [ "${dark_blur:-${light_blur:-10}}" != "${light_blur:-10}" ] ||
+		[ "${dark_opacity:-${light_opacity:-0.5}}" != "${light_opacity:-0.5}" ]; then
+		uci set 'frost.@global[0].dark_glass_mode=custom'
+	else
+		uci set 'frost.@global[0].dark_glass_mode=inherit'
+	fi
+fi
+while read -r option value; do
+	uci -q get "frost.@global[0].$option" >/dev/null ||
+		uci set "frost.@global[0].$option=$value"
+done <<'DEFAULTS'
+login_style centered
+glass_admin 1
+glass_alpha 0.5
+glass_blur 20
+auto_color 1
+primary #5e72e4
+dark_primary #483d8b
+blur 10
+blur_dark 10
+transparency 0.5
+transparency_dark 0.5
+mode normal
+online_wallpaper none
+DEFAULTS
+uci commit frost
+
+if [ "$PKG_UPGRADE" != 1 ]; then
+	uci get luci.themes.Frost >/dev/null 2>&1 || \
+	uci batch <<-EOF
+		set luci.themes.Frost=/luci-static/frost
+		set luci.main.mediaurlbase=/luci-static/frost
+		commit luci
+	EOF
+fi
+
+exit 0

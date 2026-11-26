@@ -1,0 +1,11 @@
+{
+    "luci-theme-frost": {
+        "description": "Grant UCI access for luci-theme-frost",
+        "read": {
+            "ubus": {
+                "luci.frost_appearance": [ "get" ]
+            },
+            "uci": [ "frost" ]
+        }
+    }
+}
